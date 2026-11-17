@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أسئلة MCQ – معمارية الحاسوب</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#1b2333;--mu:#5b6578;--pr:#2f5fd0;--ok:#168a4a;--okb:#e2f6ea;--no:#c0392b;--nob:#fde8e6;--bd:#dde2ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141d;--card:#1a2030;--tx:#e8ecf5;--mu:#9aa5bb;--pr:#7ea2ff;--ok:#5fd592;--okb:#143323;--no:#ff8f82;--nob:#3a1b18;--bd:#2c3550}}
+:root[data-theme="dark"]{--bg:#10141d;--card:#1a2030;--tx:#e8ecf5;--mu:#9aa5bb;--pr:#7ea2ff;--ok:#5fd592;--okb:#143323;--no:#ff8f82;--nob:#3a1b18;--bd:#2c3550}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,sans-serif;line-height:1.7}
+header{background:var(--pr);color:#fff;padding:22px 16px;text-align:center}
+header h1{margin:0;font-size:1.35rem}header p{margin:4px 0 0;opacity:.9;font-size:.95rem}
+.by{display:inline-block;margin-top:8px;background:rgba(255,255,255,.18);padding:2px 14px;border-radius:99px;font-weight:700}
+main{max-width:760px;margin:0 auto;padding:14px}
+.bar{position:sticky;top:0;background:var(--bg);padding:8px 0;display:flex;gap:6px;flex-wrap:wrap;align-items:center;z-index:5}
+.bar button{font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:5px 12px;border-radius:99px;cursor:pointer}
+.bar button.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+.sc{margin-inline-start:auto;font-weight:700;color:var(--pr)}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:12px 0}
+.q h3{margin:0 0 10px;font-size:1rem;direction:ltr;text-align:left}
+.q small{color:var(--mu)}
+.o{display:block;width:100%;direction:ltr;text-align:left;font:inherit;background:transparent;color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.o.ok{background:var(--okb);border-color:var(--ok)}.o.no{background:var(--nob);border-color:var(--no)}
+.ar{display:none;margin-top:10px;padding:10px 12px;border-inline-start:4px solid var(--pr);background:var(--bg);border-radius:8px;font-size:.95rem}
+.q.done .ar{display:block}.ar b{color:var(--pr)}
+footer{text-align:center;color:var(--mu);padding:20px;font-size:.9rem}
+</style></head><body>
+<header><h1>أسئلة MCQ – تركيب ومعمارية الحاسوب</h1><p>المحاضرة 1 + المحاضرة 2 (Von Neumann) – د. حسن الجواهري</p><span class="by">إعداد: محمد الإسماعيلي</span></header>
+<main>
+<div class="bar"><button class="on" data-f="0">الكل</button><button data-f="1">م1</button><button data-f="2">م2</button><button id="rs">إعادة</button><span class="sc" id="sc"></span></div>
+<div id="list"></div></main>
+<footer>إعداد محمد الإسماعيلي</footer>
+<script>
+const D=[
+[1,"Architecture refers to:",["Attributes visible to the programmer (ISA, registers, data types)","Physical wiring and circuits","Cost of the chips","Cooling methods"],"الـ Architecture هي ما يراه المبرمج: التصميم المفاهيمي والسلوك الوظيفي ومجموعة التعليمات."],
+[1,"Organization refers to:",["The hardware units and their interconnections that realize the architecture","The instruction set only","The programming language","The operating system"],"الـ Organization هي الوحدات المادية وترابطها التي تنفذ مواصفات المعمارية، وتحدد الأداء والكلفة والكفاءة."],
+[1,"In the car analogy, the steering wheel and pedals represent:",["Architecture","Organization","Cache","Bus"],"عجلة القيادة والدواسات = Architecture (واجهة السائق)، أما المحرك والتمديدات تحت الغطاء = Organization."],
+[1,"Key takeaway: the same architecture can be built with different organizations, so software runs:",["Without recompilation","Only after recompilation","Only on one machine","Only in assembly"],"يمكن بناء تنظيمات مادية مختلفة لنفس المعمارية، فتشغّل نفس البرامج بسرعات وأسعار مختلفة بدون إعادة ترجمة."],
+[1,"Which is NOT one of the four functional components?",["Compiler","CPU","Main Memory","System Interconnection"],"المكونات الأربعة: المعالج CPU، الذاكرة الرئيسية، نظام الإدخال/الإخراج I/O، وربط النظام (Buses)."],
+[1,"Intel and AMD desktop processors share which ISA?",["x86 / x86-64","ARM","RISC-V","MIPS only"],"معالجات Intel وAMD تشترك بمعمارية x86/x86-64، أما الموبايل والمدمجة فغالباً ARM أو RISC-V."],
+[1,"Registers are:",["Small high-speed memory cells inside the processor core","Large disks","External RAM modules","Bus lines"],"المسجلات خلايا ذاكرة صغيرة وسريعة داخل نواة المعالج لمعالجة البيانات وتتبع الحالة."],
+[1,"The Control Unit (CU):",["Fetches, decodes instructions and generates control signals","Performs only additions","Stores files","Cools the CPU"],"وحدة السيطرة تجلب التعليمات من الذاكرة وتفك شفرتها وتولّد إشارات التوقيت والسيطرة."],
+[1,"Why does a Core i9 outperform a Core i3 with the same ISA?",["Different microarchitecture (pipelining, multi-core)","Different instruction set","Different programming language","Different keyboard"],"السبب اختلاف الـ Microarchitecture مثل الـ pipelining والمعالجات المتعددة النوى رغم تطابق الـ ISA."],
+[1,"DRAM differs from SRAM because DRAM:",["Needs periodic refresh and is cheaper/denser","Is used in CPU caches","Is faster than registers","Is flip-flop based"],"الـ DRAM تحتاج تحديثاً دورياً وكثافتها عالية وأرخص (رام رئيسية)، أما SRAM فسريعة وأغلى وتُستخدم في الكاش."],
+[1,"Fastest level in the memory hierarchy:",["Registers","Cache","Main memory","SSD"],"الأسرع هي المسجلات (أقل من 1 ns) ثم الكاش ثم الرام ثم التخزين الثانوي؛ كلما نزلنا تزداد السعة وتقل السرعة."],
+[1,"Typical cache (L1-L3) latency:",["1 – 10 ns","50 – 100 ns","10 µs – 10 ms","< 1 ns"],"زمن وصول الكاش تقريباً 1–10 نانوثانية، والرام 50–100 ns، والتخزين الثانوي 10 µs–10 ms."],
+[1,"In Memory-Mapped I/O:",["Device registers share the memory address space (LOAD/STORE)","A separate address space with IN/OUT","Devices use no addresses","Only DMA is used"],"في Memory-Mapped تُربط مسجلات الجهاز بعنوان الذاكرة وتُقرأ بتعليمات LOAD/STORE العادية."],
+[1,"Port-Mapped (Isolated) I/O uses:",["Special instructions such as IN and OUT","LOAD/STORE only","Interrupts only","Cache"],"Port-Mapped يملك فضاء عناوين منفصلاً للأجهزة ويُتعامل معه بتعليمات خاصة مثل IN وOUT في x86."],
+[1,"Polling means:",["The CPU repeatedly checks the device status until ready","The device interrupts the CPU","DMA transfers data","The CPU sleeps"],"الـ Polling: المعالج يسأل باستمرار عن حالة الجهاز (busy-wait) حتى يصير جاهزاً."],
+[1,"Interrupt-driven I/O allows the CPU to:",["Execute other tasks until the device signals (IRQ)","Wait idle","Skip decoding","Increase RAM"],"في الـ Interrupt يرسل الجهاز طلب مقاطعة IRQ عند الحدث، فيشتغل المعالج بمهام أخرى لحين الإشارة."],
+[1,"The address bus is:",["Unidirectional; its width determines addressable memory","Bidirectional; carries data","Carries only clock","Carries power"],"ناقل العنوان أحادي الاتجاه وعرضه يحدد سعة الذاكرة القابلة للعنونة (2^32 مقابل 2^64 بايت)."],
+[1,"The data bus is:",["Bidirectional","Unidirectional CPU to memory","Used for clock only","Used for addresses"],"ناقل البيانات ثنائي الاتجاه ينقل البيانات والتعليمات بين الوحدات، وعرضه يحدد كمية النقل."],
+[1,"Which belongs to the control bus?",["Memory Read/Write, Clock, Reset, Acknowledge","Operand values","Memory addresses","Instruction opcodes"],"ناقل السيطرة يحمل إشارات التنسيق مثل Read/Write والساعة وإعادة الضبط وBus Request/Grant."],
+[1,"Main limitation of the classic shared system bus:",["Bandwidth bottleneck: only one master transmits at a time","High pin count","Complex routing","Expensive wiring"],"الـ Shared Bus بسيط ورخيص لكن عنق زجاجة بالعرض الترددي: جهاز واحد فقط يرسل بالوقت الواحد."],
+[1,"Which is a modern point-to-point interconnect?",["PCIe / AMD Infinity Fabric","ISA bus","Shared parallel bus","Parity bit"],"الـ Point-to-Point روابط مباشرة مخصصة بين المكونات (PCIe, Infinity Fabric) بنطاق عالٍ لكن أعقد وأكثر أرجلاً."],
+[2,"The Stored-Program Concept (1945) was introduced by:",["John von Neumann with Eckert and Mauchly","Alan Turing alone","John Backus","Charles Babbage"],"في 1945 قدّم فون نيومان مع إيكرت وموشلي فكرة تخزين التعليمات في نفس الذاكرة السريعة مع البيانات."],
+[2,"Before the stored-program concept, computers were reprogrammed by:",["Physical rewiring and plugboards","Software updates","Compilers","Cloud services"],"كانت تُعاد برمجتها بإعادة التسليك اليدوي وتعديل اللوحات والمفاتيح، وهذا بطيء ومعرّض للأخطاء."],
+[2,"The two Von Neumann principles are:",["Stored Program and Sequential Execution","Pipelining and Caching","Harvard and Dataflow","Polling and Interrupt"],"المبدأان: البرنامج المخزّن (التعليمات والبيانات بنفس الذاكرة) والتنفيذ التتابعي بترتيب العناوين ما لم يحدث قفز."],
+[2,"Memory distinguishes instructions from data by:",["Nothing; the CU’s context (cycle phase) decides","Special colored cells","Separate wires","A flag bit in every byte"],"الذاكرة لا تفرّق بينهما (كلاهما 0 و1)؛ الـ CU حسب مرحلة الدورة تقرر هل هي عملية أم بيانات."],
+[2,"The Program Counter (PC) holds:",["Address of the next instruction to fetch","The current instruction","The ALU result","The data read"],"الـ PC يخزّن عنوان التعليمة التالية وتزداد قيمته تلقائياً بعد كل جلب."],
+[2,"The Instruction Register (IR) holds:",["The instruction currently being decoded/executed","Next address","Memory data only","Status flags"],"الـ IR يحتفظ بالصيغة الثنائية للتعليمة الجاري فك شفرتها وتنفيذها."],
+[2,"MAR holds:",["The memory address to read from or write to","The data read","The opcode","The result of ALU"],"الـ MAR يحمل عنوان الموقع في الذاكرة المراد القراءة منه أو الكتابة إليه."],
+[2,"MDR (MBR) holds:",["The content read from or to be written to memory","The memory address","The next PC","The flags"],"الـ MDR/MBR يحمل المحتوى المقروء من الذاكرة أو المنتظر كتابته فيها."],
+[2,"The Accumulator (AC) is used to:",["Temporarily hold operands and ALU results","Store the PC","Hold addresses","Control the bus"],"المجمّع AC مسجل سريع يحتفظ مؤقتاً بالمعاملات والنتائج الوسطية للعمليات الحسابية والمنطقية."],
+[2,"The Status/Flag register contains:",["Zero, Carry, Overflow, Sign, Parity","Memory addresses","Opcodes","Program text"],"مسجل الحالة يحمل أعلاماً من بت واحد (Zero, Carry, Overflow, Sign, Parity) ناتجة عن حسابات الـ ALU."],
+[2,"First micro-operation of the Fetch phase:",["MAR ← PC","IR ← MDR","PC ← Target","MDR ← AC"],"أول خطوة بالجلب: نسخ العنوان من PC إلى MAR، ثم MDR←Memory[MAR] مع زيادة PC، ثم IR←MDR."],
+[2,"In the Decode phase the CU:",["Extracts the opcode and identifies operands","Writes the result","Increments MAR","Refreshes DRAM"],"في فك الشفرة يستخرج الـ CU رمز العملية (opcode) ويحدد المعاملات ومصدر ووجهة البيانات."],
+[2,"The Von Neumann Bottleneck occurs because:",["Instructions and data share the same bus and memory","CPU is too slow","Cache is too large","Registers are few"],"بسبب مشاركة التعليمات والبيانات نفس الناقل والذاكرة لا يمكن جلب تعليمة وقراءة بيانات بنفس الوقت."],
+[2,"The term “Von Neumann Bottleneck” was coined by:",["John Backus (1977)","Intel","Alan Turing","Harvard"],"أطلق المصطلح جون باكوس في محاضرة جائزة تورنغ عام 1977."],
+[2,"Which is a modern mitigation of the bottleneck?",["Hierarchical caches and branch prediction","Removing RAM","Using more disks","Slower clock"],"الحلول: ذاكرة كاش هرمية، الجلب المسبق وتوقع الفروع، وال pipelining، وفصل كاش L1."],
+[2,"Pure Harvard architecture:",["Separates instruction and data memories and buses","Uses one unified memory","Has no memory","Uses quantum bits"],"هارفرد الصرف يفصل ذاكرة التعليمات عن البيانات بناقلين مستقلين فيتم الوصول لهما بنفس الوقت."],
+[2,"A security advantage of Harvard architecture:",["Data cannot be executed as code, limiting some buffer-overflow exploits","Faster internet","More RAM","Free software"],"ميزة أمنية: لا يمكن تنفيذ البيانات كشيفرة، مما يمنع بعض هجمات buffer overflow."],
+[2,"Which uses (pure) Harvard architecture?",["AVR/PIC microcontrollers and DSPs","Intel Core i9","Apple M-series","NVIDIA RTX"],"أمثلة هارفرد: متحكمات PIC وAVR (Arduino UNO) ومعالجات DSP مثل TMS320."],
+[2,"Modified Harvard (modern CPUs) has:",["Split L1 I-cache/D-cache with unified RAM","Fully separate RAM","No cache","A single bus only"],"المعدّل: كاش L1 منفصل للتعليمات والبيانات داخلياً، وذاكرة L2/L3 والرام موحّدة خارجياً."],
+[2,"Dataflow architecture executes an instruction:",["As soon as its operands are available","By Program Counter order","Only at boot","By interrupt only"],"في Dataflow لا يوجد PC تتابعي؛ تنفذ التعليمة فور جاهزية مدخلاتها (مثل Google TPU)."],
+[2,"Neuromorphic computing (e.g., Intel Loihi):",["Co-locates computation and memory like neurons","Uses punch cards","Uses a single bus","Uses only DRAM"],"الحوسبة العصبية تحاكي الشبكات العصبية بدمج الحساب والذاكرة وتلغي حركة البيانات عبر الناقل."],
+[2,"Quantum computing replaces bits with:",["Qubits using superposition and entanglement","Bytes","Registers","Buses"],"الحوسبة الكمية تستبدل البتات بـ qubits القادرة على التراكب والتشابك وتتخلى عن دورة fetch-decode-execute."],
+[1,"Computer Organization is described as:",["The hardware implementation of the architecture","The programmer’s contract","The instruction set","The application software"],"الـ Organization هي التنفيذ المادي للمعمارية: كيف تُبنى الأجهزة، بينما Architecture هي نظرة المبرمج أو العقد."],
+[1,"In the house analogy, plumbing routing and wiring gauge represent:",["Organization","Architecture","ISA","Registers"],"المخطط (عدد الغرف، الأبواب) = Architecture، أما تفاصيل البناء (الخرسانة، السباكة، الأسلاك) = Organization."],
+[1,"The CPU is described as:",["The computational brain that executes instructions","The volatile workspace","The bridge to peripherals","The communication infrastructure"],"الـ CPU هو الدماغ الحسابي الذي ينفذ التعليمات."],
+[1,"Main memory is described as:",["A volatile high-speed workspace for active programs and data","Permanent storage","A bridge to peripherals","A bus"],"الذاكرة الرئيسية مساحة عمل سريعة ومتطايرة (volatile) تحمل البرامج والبيانات الفعالة."],
+[1,"The I/O system is:",["The communication bridge to external peripherals","The brain","The workspace","The buses"],"نظام الإدخال/الإخراج هو الجسر الذي يربط النظام بالأجهزة الخارجية."],
+[1,"Which are examples of ISA operations?",["ADD, LOAD, STORE, JUMP, BRANCH","DRAM, SRAM","USB, PCIe","L1, L2, L3"],"الـ ISA هي مفردات المعالج الأصلية وتعرّف العمليات المتاحة مثل ADD وLOAD وSTORE وJUMP وBRANCH."],
+[1,"Supported data types (architecture) include:",["8-bit characters, 32-bit two’s complement integers, 64-bit IEEE 754 floats","DRAM refresh","Cache size","Bus traces"],"أنواع البيانات المدعومة تعريف معماري: محارف 8 بت، أعداد صحيحة 32 بت بالمتمم الثنائي، وأعداد 64 بت IEEE 754."],
+[1,"The ALU performs:",["Integer arithmetic and bitwise logic (AND, OR, XOR, NOT, shifts)","Instruction fetching","Timing signal generation","Bus arbitration"],"الـ ALU دوائر تجري العمليات الحسابية الصحيحة والمنطقية (AND, OR, XOR, NOT, الإزاحة)."],
+[1,"Pipelining, superscalar execution, branch prediction and multi-core are:",["Microarchitecture techniques (Organization)","ISA features","Data types","Address space rules"],"هذه تقنيات تصميم داخلي (Microarchitecture): تراكب مراحل التنفيذ، التنفيذ الفائق، توقع الفروع، تعدد النوى."],
+[1,"The Register File contains:",["PC, IR and general registers","DRAM and SRAM","Bus lines","Device drivers"],"ملف المسجلات يضم عداد البرنامج PC ومسجل التعليمة IR والمسجلات العامة."],
+[1,"Programmers perceive memory as:",["A continuous linear array of uniquely numbered bytes","A tree of folders","Disk sectors","Cache lines"],"المبرمج يرى الذاكرة مصفوفة خطية متصلة من البايتات لكل منها عنوان، ويمكن الوصول لأي بايت بزمن ثابت (RAM)."],
+[1,"The Memory Controller:",["Manages access arbitration, channel timing and signalling between processor and DIMMs","Stores the program","Executes ALU operations","Decodes opcodes"],"متحكم الذاكرة دائرة سريعة تدير أولويات الوصول وتوقيت القنوات والإشارات الكهربائية بين المعالج وشرائح الذاكرة."],
+[1,"The memory hierarchy exists because of tradeoffs between:",["Access latency, cost per bit and capacity","Color and size","Language and syntax","Voltage only"],"الذاكرة هرمية بسبب المفاضلة بين زمن الوصول والكلفة لكل بت والسعة القصوى؛ الأسرع أغلى وأصغر."],
+[1,"Typical main memory (DDR4/DDR5 DRAM) capacity and latency:",["8–128 GB, 50–100 ns","< 1 KB, < 1 ns","32 KB–128 MB, 1–10 ns","512 GB–8 TB, 10 µs–10 ms"],"الرام: سعة 8–128 جيجا وزمن 50–100 ns؛ المسجلات < 1KB؛ الكاش 32KB–128MB؛ التخزين 512GB–8TB."],
+[1,"Hardware Device Controllers (e.g., USB host, NVMe/SATA, GPU display) do what?",["Translate high-level bus commands into low-level electrical signals","Schedule processes","Compile code","Store the OS"],"متحكمات الأجهزة شرائح مخصصة تحوّل أوامر الناقل العالية إلى إشارات كهربائية منخفضة المستوى."],
+[1,"Device Drivers are:",["OS kernel modules abstracting hardware protocols into system-call interfaces","Physical chips","Bus wires","Cache memories"],"مشغّلات الأجهزة وحدات في نواة النظام تخفي تفاصيل بروتوكول الجهاز وتعرضه كواجهات system call."],
+[1,"The system interconnection structure provides:",["Pathways for data, instructions, addresses and sync signals across CPU, memory, I/O","Only power","Only storage","Only display"],"بنية الربط توفر مسارات فيزيائية لنقل البيانات والتعليمات والعناوين وإشارات التزامن بين CPU والذاكرة وI/O."],
+[1,"Advantages of the classic shared bus:",["Simple wiring, standardized protocol, low cost","Massive aggregate bandwidth","Independent concurrent links","High scalability"],"مزايا الناقل المشترك: توصيل بسيط وبروتوكول موحّد وكلفة قليلة؛ بينما مزايا point-to-point هي نطاق عالٍ وتوازي وقابلية توسع."],
+[1,"Memory-mapped vs port-mapped I/O and polling vs interrupt model are:",["Architectural aspects of the I/O system","Organizational aspects","Cache features","Bus traces"],"هذه جوانب معمارية (What) لنظام I/O، أما متحكمات الأجهزة وDMA وشرائح PHY الفيزيائية فهي جوانب تنظيمية (How)."],
+[1,"Which is an Organizational aspect of CPU in the summary matrix?",["ALU design, control-unit state machine, pipelining, multi-core","ISA and registers","Data types","Addressing modes"],"الجانب المعماري للـ CPU: ISA والمسجلات وأنواع البيانات وأنماط العنونة؛ والتنظيمي: تصميم ALU وآلة حالات CU والـ pipelining."],
+[1,"Physical bus traces, PCIe/QPI links and differential signaling are:",["Organizational aspects of interconnection","Architectural aspects","ISA elements","Data types"],"المسارات الفيزيائية وروابط PCIe/QPI والإشارات التفاضلية = تنظيم؛ أما العنونة المنطقية وبروتوكولات النقل ومتجهات المقاطعة = معمارية."],
+[1,"DRAM chips, L1/L2/L3 SRAM caches and the memory controller are:",["Organizational aspects of memory","Architectural aspects of memory","ISA features","Interrupt vectors"],"شرائح DRAM وتسلسل الكاش والمتحكم = تنظيم الذاكرة؛ أما فضاء العناوين ومحاذاة البايت وقواعد العنونة = معمارية."],
+[2,"The Stored-Program Concept appeared in which document?",["First Draft of a Report on the EDVAC","Turing’s ACE report","ENIAC manual","Harvard Mark I report"],"ظهرت الفكرة في وثيقة ‘المسودة الأولى لتقرير عن EDVAC’ (يونيو 1945)."],
+[2,"The Stored Program Principle states instructions and data reside in:",["The same unified linearly addressed primary memory","Separate memories","Cache only","Disk only"],"التعليمات والبيانات (المعاملات والمتغيرات والثوابت) تقيم في نفس فضاء الذاكرة الأولية الموحّد."],
+[2,"The CPU executes instructions sequentially in ascending order unless:",["A branch, jump or subroutine call changes the flow","A cache miss occurs","The data bus is wide","It never changes"],"يتم التنفيذ تتابعياً بترتيب العناوين ما لم تغيّر تعليمة تحويل (شرطي، قفز، استدعاء) مسار البرنامج."],
+[2,"The four Von Neumann subsystems are:",["CPU (CU + ALU), Memory, I/O, System Bus","CPU, GPU, RAM, Disk","ALU, Cache, Disk, Bus","CU, Registers, Cache, I/O"],"النظام يتألف من: المعالج (CU وALU)، الذاكرة، نظام I/O، وناقل النظام."],
+[2,"In the master-chef analogy, the recipe and the ingredients are:",["Program code and data variables stored in main memory","The ALU and CU","The buses","The I/O ports"],"الوصفة = كود البرنامج، المكونات = متغيرات البيانات، وكلاهما في الذاكرة الرئيسية، والطباخ = CPU."],
+[2,"Key registers of the Control Unit are:",["PC and IR","AC and FLAGS","MAR and MDR","PC and AC"],"مسجلات الـ CU: PC وIR؛ ومسجلات الـ ALU: AC وFLAGS؛ ومسجلات الذاكرة: MAR وMDR."],
+[2,"The I/O subsystem includes:",["Interface controllers, data buffers and status registers","ALU and CU","PC and IR","MAR and MDR"],"نظام I/O يضم متحكمات واجهة ومخازن بيانات ومسجلات حالة تترجم بروتوكولات الإشارات الخارجية للصيغ الداخلية."],
+[2,"A 32-bit address bus can address ___ and a 64-bit one ___:",["4 GB, 16 EB","4 MB, 16 GB","16 GB, 4 EB","2 GB, 8 EB"],"عرض ناقل العنوان يحدد السعة: 32 بت = 4 GB، و64 بت = 16 EB."],
+[2,"Data bus width determines:",["How much data can be transferred in a single clock cycle","Maximum memory capacity","Clock speed","Number of interrupts"],"عرض ناقل البيانات يحدد كمية البيانات المنقولة في دورة ساعة واحدة."],
+[2,"The control bus carries:",["Memory Read/Write, I/O Read/Write, clock pulses, interrupt requests, acknowledge","Memory addresses only","Data words only","Opcodes only"],"ناقل السيطرة يحمل إشارات الأوامر والتزامن: قراءة/كتابة الذاكرة وI/O، النبضات، طلبات المقاطعة، والإقرار."],
+[2,"During fetch, the CU places the MAR address on the address bus and asserts:",["The Memory Read line","The Memory Write line","The Interrupt line","The Reset line"],"وحدة السيطرة تضع العنوان على ناقل العنوان وتفعّل خط Memory Read ثم تعود التعليمة عبر ناقل البيانات إلى MDR."],
+[2,"Fetch step 2 (MDR ← Memory[MAR], PC ← PC + 1) aims to:",["Retrieve the instruction code and advance the counter","Decode the opcode","Write results","Update flags"],"الخطوة تسترجع كود التعليمة وتزيد عداد البرنامج؛ ثم IR ← MDR لتثبيت التعليمة."],
+[2,"In the Execute phase the ALU result is placed into:",["The Accumulator or a target register","The PC","The MAR","The IR"],"الـ ALU يعالج المعاملات ويضع النتيجة في المجمّع أو المسجل الهدف، وقد يتطلب وصولاً إضافياً للذاكرة."],
+[2,"If a branch condition evaluates true:",["PC ← Target_Address","PC ← PC + 1","IR ← MDR","MAR ← PC"],"عند تحقق شرط الفرع أو القفز يُحمّل عنوان الهدف في PC ثم تبدأ الدورة من جديد بالجلب."],
+[2,"The Writeback stage:",["Commits the final outcome and updates status flags","Fetches the instruction","Decodes the opcode","Sends the address"],"مرحلة الكتابة الراجعة: Destination ← Result وتحديث أعلام الحالة."],
+[2,"The ‘Memory Wall’ means:",["CPU speed grew far faster than DRAM speed, causing stalls","DRAM became faster than CPUs","Caches are too large","Buses are too wide"],"سرعة المعالج نمت أسرع بكثير من الـ DRAM فصار المعالج يضيع ملايين الدورات بانتظار الذاكرة (stalls)."],
+[2,"Instruction prefetching and branch prediction:",["Speculatively load upcoming instructions into buffers before they are requested","Remove the bus","Add more RAM","Slow down the clock"],"الجلب المسبق وتوقع الفروع يحمّلان التعليمات القادمة تخمينياً قبل طلبها لتقليل الانتظار."],
+[2,"Pure Harvard architecture was developed initially for:",["The Harvard Mark I","ENIAC","EDVAC","Colossus"],"هارفرد الصرف طُوّر أصلاً لحاسوب Harvard Mark I الكهروميكانيكي بفصل مخزن التعليمات عن البيانات."],
+[2,"In Harvard, the instruction bus and data bus operate:",["In complete parallel","Sequentially","As one shared bus","Only at boot"],"ناقلا التعليمات والبيانات مستقلان ويعملان بالتوازي، فيجلب المعالج تعليمة ويقرأ بيانات في نفس حافة الساعة."],
+[2,"A performance advantage of Harvard architecture:",["Higher instruction throughput and deterministic timing","Flexible memory allocation","Fewer pins","Simpler silicon"],"ميزتها إنتاجية أعلى وتوقيت تنفيذ حتمي؛ وعيبها كثرة الأرجل وتعقيد السيليكون وتقسيم ذاكرة جامد."],
+[2,"Digital Signal Processors (DSPs) examples:",["TI TMS320 and Analog Devices SHARC","Intel Xeon","AMD EPYC","NVIDIA H100"],"أمثلة DSP: TI TMS320 وAnalog Devices SHARC (معالجة صوت/إشارة بزمن حقيقي)؛ وكذلك ARM Cortex-M وECUs السيارات."],
+[2,"Which are Modified Harvard implementations?",["Intel Core, AMD Ryzen, ARM Cortex-A (Apple M), NVIDIA GPUs","Microchip PIC","Atmel AVR","TI TMS320"],"المعدّل هو المعيار الحديث بالحواسيب والسيرفرات والموبايل (Snapdragon، Raspberry Pi) ومعالجات الرسوم (GeForce, H100, Radeon)."],
+[2,"Table 3: Von Neumann memory utilization is:",["Optimal (flexible dynamic allocation)","Rigid fixed split","Not applicable","Poor and static"],"فون نيومان: استغلال ذاكرة مثالي بتخصيص ديناميكي؛ هارفرد الصرف جامد؛ والمعدّل مثالي بذاكرة رئيسية مشتركة."],
+[2,"Table 3: Simultaneous fetch & data access in Modified Harvard happens:",["Yes, at the L1 cache level","No","Fully parallel everywhere","Never"],"فون نيومان لا (تنازع الناقل)، هارفرد نعم (توازٍ كامل)، والمعدّل نعم على مستوى كاش L1 فقط."],
+[2,"Dataflow architecture examples:",["Google TPU, Graphcore IPU, Wave Computing","Intel Loihi","IBM Quantum","AVR"],"أمثلة Dataflow مسرّعات الذكاء الاصطناعي: Google TPU وGraphcore IPU وWave Computing."],
+[2,"IBM TrueNorth is an example of:",["Neuromorphic computing","Quantum computing","Dataflow","Pure Harvard"],"الحوسبة العصبية (Intel Loihi وIBM TrueNorth) تدمج الحساب والذاكرة كالمشابك والخلايا العصبية."],
+[2,"IBM Quantum and Google Sycamore are examples of:",["Quantum computing","Neuromorphic computing","Dataflow","Modified Harvard"],"أمثلة الحوسبة الكمية: IBM Quantum وGoogle Sycamore."],
+[2,"Non-Von Neumann architectures gained prominence because of:",["AI, big data and quantum simulations pushing semiconductor limits","Cheaper keyboards","Smaller screens","Lower clock speeds"],"زيادة متطلبات الذكاء الاصطناعي والبيانات الضخمة والمحاكاة الكمية دفعت الفيزياء التقليدية لحدودها."]
+];
+const L=document.getElementById("list"),S=document.getElementById("sc");let f=0,ok=0,ans=0;
+const sh=a=>{a=a.map((t,i)=>({t,c:i==0}));for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function build(){L.innerHTML="";ok=ans=0;upd();D.forEach((d,n)=>{if(f&&d[0]!=f)return;
+const q=document.createElement("div");q.className="q";q.innerHTML='<small>المحاضرة '+d[0]+' – سؤال '+(n+1)+'</small><h3></h3><div class="ar"><b>الترجمة:</b> '+d[3]+'</div>';
+q.querySelector("h3").textContent=d[1];
+sh(d[2]).forEach(o=>{const b=document.createElement("button");b.className="o";b.textContent=o.t;b.onclick=()=>{if(q.classList.contains("done"))return;q.classList.add("done");ans++;
+if(o.c){ok++;b.classList.add("ok")}else{b.classList.add("no");[...q.querySelectorAll(".o")].forEach(x=>{if(x.dataset.c)x.classList.add("ok")})}upd()};
+if(o.c)b.dataset.c=1;q.insertBefore(b,q.querySelector(".ar"))});L.appendChild(q)})}
+function upd(){S.textContent="النتيجة: "+ok+" / "+ans}
+document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-f]").forEach(x=>x.classList.remove("on"));b.classList.add("on");f=+b.dataset.f;build()});
+document.getElementById("rs").onclick=build;build();
+</script></body></html>
